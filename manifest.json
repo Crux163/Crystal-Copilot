@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "CrystalCoPilot Cross-Lister",
+  "version": "1.0.0",
+  "description": "One-click crystal listing auto-fill for Facebook Marketplace, Gumtree AU, and Depop.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://*.supabase.co/*",
+    "https://www.facebook.com/*",
+    "https://www.gumtree.com.au/*",
+    "https://www.depop.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/marketplace/create/*",
+        "https://www.gumtree.com.au/p-post-ad.html*",
+        "https://www.depop.com/products/create*"
+      ],
+      "js": ["content/index.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
